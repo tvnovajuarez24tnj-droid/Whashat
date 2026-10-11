@@ -8,15 +8,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Inter', system-ui, sans-serif; }
         :root {
             --primario: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
-            --primario-solido: #6366f1;
             --fundo: #0f0f1a;
             --caixa: #1a1a2e;
             --caixa-clara: #252540;
             --texto: #e0e0e0;
             --texto-suave: #a0a0b0;
             --destaque: #6366f1;
-            --sucesso: #10b981;
-            --alerta: #f59e0b;
             --perigo: #e74c3c;
         }
         body {
@@ -28,415 +25,239 @@
             padding-bottom: 80px;
         }
 
-        /* Cabeçalho */
         header {
             background: var(--primario);
             padding: 14px 30px;
             position: fixed;
-            top: 0;
-            width: 100%;
+            top: 0; width: 100%;
             z-index: 100;
             box-shadow: 0 4px 25px rgba(99, 102, 241, 0.35);
         }
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: white;
-            letter-spacing: 3px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
+        .nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: 3px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
         .logo span { font-size: 12px; font-weight: 400; letter-spacing: 1px; opacity: 0.85; }
         .nav-botoes button {
             background: rgba(255,255,255,0.18);
             border: 1px solid rgba(255,255,255,0.15);
-            color: white;
-            padding: 8px 18px;
-            border-radius: 25px;
-            cursor: pointer;
-            margin-left: 8px;
-            transition: all 0.25s ease;
-            font-size: 14px;
-            font-weight: 500;
+            color: white; padding: 8px 18px; border-radius: 25px;
+            cursor: pointer; margin-left: 8px; transition: all 0.25s ease;
+            font-size: 14px; font-weight: 500;
         }
-        .nav-botoes button:hover {
-            background: white;
-            color: var(--destaque);
-            transform: translateY(-1px);
-        }
+        .nav-botoes button:hover { background: white; color: var(--destaque); transform: translateY(-1px); }
 
-        /* Container Principal */
         main { max-width: 900px; margin: 90px auto 30px; padding: 0 20px; }
 
-        /* ===== TELAS ===== */
         .tela { display: none; animation: fadeIn 0.35s ease; }
         .tela.ativa { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Cabeçalho de cada tela */
         .tela-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 22px;
-            padding-bottom: 14px;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 22px; padding-bottom: 14px;
             border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+            flex-wrap: wrap; gap: 10px;
         }
-        .tela-header h2 {
-            color: white;
-            font-size: 22px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .tela-header h2 { color: white; font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
         .btn-voltar {
             background: rgba(99, 102, 241, 0.15);
             border: 1px solid rgba(99, 102, 241, 0.3);
-            color: var(--destaque);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            font-weight: 500;
+            color: var(--destaque); padding: 8px 16px; border-radius: 20px;
+            cursor: pointer; font-size: 14px; transition: all 0.2s ease; font-weight: 500;
         }
-        .btn-voltar:hover {
-            background: var(--destaque);
-            color: white;
-            transform: translateX(-3px);
-        }
+        .btn-voltar:hover { background: var(--destaque); color: white; transform: translateX(-3px); }
 
-        /* ===== TELA INICIAL: LISTA DE USUÁRIOS ===== */
-        .boas-vindas {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+        /* TELA INICIAL */
+        .boas-vindas { text-align: center; margin-bottom: 30px; }
         .boas-vindas h1 {
-            color: white;
-            font-size: 28px;
-            margin-bottom: 8px;
+            color: white; font-size: 28px; margin-bottom: 8px;
             background: var(--primario);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
         .boas-vindas p { color: var(--texto-suave); font-size: 15px; }
 
-        .lista-usuarios {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 16px;
-        }
+        .lista-usuarios { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+
         .cartao-usuario {
-            background: var(--caixa);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.25s ease;
+            background: var(--caixa); border-radius: 16px; padding: 20px; text-align: center;
+            cursor: pointer; transition: all 0.25s ease;
             border: 1px solid rgba(99, 102, 241, 0.12);
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
         }
         .cartao-usuario::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 4px;
-            background: var(--primario);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: var(--primario); transform: scaleX(0); transition: transform 0.3s ease;
         }
         .cartao-usuario:hover::before { transform: scaleX(1); }
-        .cartao-usuario:hover {
-            transform: translateY(-5px);
-            border-color: var(--destaque);
-            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.3);
-        }
-        .cartao-usuario img {
-            width: 85px;
-            height: 85px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--destaque);
-            margin-bottom: 12px;
-        }
-        .cartao-usuario h3 {
-            color: white;
-            font-size: 17px;
-            margin-bottom: 4px;
-            font-weight: 600;
-        }
-        .cartao-usuario .cidade {
-            color: var(--texto-suave);
-            font-size: 13px;
-            margin-bottom: 14px;
-        }
+        .cartao-usuario:hover { transform: translateY(-5px); border-color: var(--destaque); box-shadow: 0 12px 30px rgba(99, 102, 241, 0.3); }
+        .cartao-usuario img { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; border: 3px solid var(--destaque); margin-bottom: 12px; }
+        .cartao-usuario h3 { color: white; font-size: 17px; margin-bottom: 4px; font-weight: 600; }
+        .cartao-usuario .cidade { color: var(--texto-suave); font-size: 13px; margin-bottom: 14px; }
         .btn-entrar-cartao {
-            background: var(--primario);
-            border: none;
-            color: white;
-            padding: 9px 22px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            width: 100%;
+            background: var(--primario); border: none; color: white;
+            padding: 9px 22px; border-radius: 20px; cursor: pointer;
+            font-size: 13px; font-weight: 600; transition: all 0.2s ease; width: 100%;
         }
-        .btn-entrar-cartao:hover {
-            transform: scale(1.03);
-            box-shadow: 0 6px 18px rgba(99, 102, 241, 0.5);
-        }
+        .btn-entrar-cartao:hover { transform: scale(1.03); box-shadow: 0 6px 18px rgba(99, 102, 241, 0.5); }
 
-        /* Botão para criar novo cadastro */
         .btn-novo-cadastro {
             background: transparent;
             border: 2px dashed rgba(99, 102, 241, 0.4);
-            color: var(--destaque);
-            border-radius: 16px;
-            padding: 30px 20px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            min-height: 180px;
+            color: var(--destaque); border-radius: 16px; padding: 30px 20px;
+            cursor: pointer; transition: all 0.25s ease;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; gap: 8px;
+            font-size: 15px; font-weight: 600; min-height: 180px;
         }
-        .btn-novo-cadastro:hover {
-            background: rgba(99, 102, 241, 0.08);
-            border-color: var(--destaque);
-            transform: translateY(-3px);
-        }
+        .btn-novo-cadastro:hover { background: rgba(99, 102, 241, 0.08); border-color: var(--destaque); transform: translateY(-3px); }
         .btn-novo-cadastro .mais { font-size: 32px; }
 
-        /* ===== FORMULÁRIO DE CADASTRO ===== */
-        .caixa-auth {
-            background: var(--caixa);
-            border-radius: 18px;
-            padding: 32px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            border: 1px solid rgba(99, 102, 241, 0.15);
-        }
+        /* CADASTRO */
+        .caixa-auth { background: var(--caixa); border-radius: 18px; padding: 32px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); border: 1px solid rgba(99, 102, 241, 0.15); }
         .caixa-auth input {
-            width: 100%;
-            padding: 13px 15px;
-            margin: 7px 0;
-            border-radius: 10px;
-            border: 1px solid #2d2d4a;
-            background: var(--caixa-clara);
-            color: white;
-            font-size: 15px;
-            transition: all 0.2s ease;
+            width: 100%; padding: 13px 15px; margin: 7px 0; border-radius: 10px;
+            border: 1px solid #2d2d4a; background: var(--caixa-clara); color: white;
+            font-size: 15px; transition: all 0.2s ease;
         }
-        .caixa-auth input:focus {
-            outline: none;
-            border-color: var(--destaque);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-        }
+        .caixa-auth input:focus { outline: none; border-color: var(--destaque); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2); }
         .caixa-auth input::placeholder { color: #6b6b8a; }
+        .caixa-auth label { color: var(--texto-suave); font-size: 13px; display: block; margin-top: 14px; margin-bottom: 6px; }
+
+        .upload-foto-area {
+            display: flex; align-items: center; gap: 14px; margin: 12px 0;
+            background: var(--caixa-clara); padding: 14px; border-radius: 10px;
+            border: 1px solid #2d2d4a;
+        }
+        .upload-foto-area img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--destaque); }
+        .btn-upload {
+            background: var(--primario); border: none; color: white;
+            padding: 9px 18px; border-radius: 20px; cursor: pointer;
+            font-size: 13px; font-weight: 600; transition: all 0.2s ease;
+        }
+        .btn-upload:hover { transform: scale(1.05); }
 
         .btn-principal {
-            background: var(--primario);
-            border: none;
-            color: white;
-            padding: 13px 30px;
-            border-radius: 25px;
-            font-size: 15px;
-            cursor: pointer;
-            margin-top: 12px;
-            transition: all 0.25s ease;
-            font-weight: 600;
-            width: 100%;
+            background: var(--primario); border: none; color: white;
+            padding: 13px 30px; border-radius: 25px; font-size: 15px;
+            cursor: pointer; margin-top: 12px; transition: all 0.25s ease;
+            font-weight: 600; width: 100%;
         }
-        .btn-principal:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.45);
+        .btn-principal:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(99, 102, 241, 0.45); }
+        .btn-perigo {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border: none; color: white; padding: 13px 30px; border-radius: 25px;
+            font-size: 15px; cursor: pointer; margin-top: 12px; transition: all 0.25s ease;
+            font-weight: 600; width: 100%;
         }
+        .btn-perigo:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(231, 76, 60, 0.45); }
 
-        /* ===== MENU DA REDE (após entrar) ===== */
+        /* MENU REDE */
         .perfil-topo {
-            background: var(--caixa);
-            border-radius: 18px;
-            padding: 24px;
-            text-align: center;
-            margin-bottom: 22px;
+            background: var(--caixa); border-radius: 18px; padding: 24px;
+            text-align: center; margin-bottom: 22px;
             border: 1px solid rgba(99, 102, 241, 0.15);
         }
-        .perfil-topo img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--destaque);
-            margin-bottom: 12px;
-            box-shadow: 0 0 25px rgba(99, 102, 241, 0.4);
-        }
+        .perfil-topo img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid var(--destaque); margin-bottom: 12px; box-shadow: 0 0 25px rgba(99, 102, 241, 0.4); }
         .perfil-topo h2 { color: white; font-size: 22px; margin-bottom: 4px; }
         .perfil-topo .info { color: var(--texto-suave); font-size: 14px; }
 
-        /* Grade de opções do menu */
-        .menu-grade {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 14px;
-        }
+        .menu-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
         .opcao-menu {
-            background: var(--caixa);
-            border-radius: 14px;
-            padding: 22px 18px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.25s ease;
+            background: var(--caixa); border-radius: 14px; padding: 22px 18px;
+            text-align: center; cursor: pointer; transition: all 0.25s ease;
             border: 1px solid rgba(99, 102, 241, 0.12);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
         }
-        .opcao-menu:hover {
-            transform: translateY(-4px);
-            border-color: var(--destaque);
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
-        }
+        .opcao-menu:hover { transform: translateY(-4px); border-color: var(--destaque); box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25); }
         .opcao-menu .icone {
-            font-size: 34px;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(99, 102, 241, 0.12);
+            font-size: 34px; width: 60px; height: 60px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; background: rgba(99, 102, 241, 0.12);
         }
-        .opcao-menu .titulo {
-            color: white;
-            font-weight: 600;
-            font-size: 15px;
-        }
-        .opcao-menu .descricao {
-            color: var(--texto-suave);
-            font-size: 12px;
-        }
+        .opcao-menu .titulo { color: white; font-weight: 600; font-size: 15px; }
+        .opcao-menu .descricao { color: var(--texto-suave); font-size: 12px; }
 
-        /* ===== MURAL DE MENSAGENS ===== */
-        .nova-mensagem {
-            background: var(--caixa);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 22px;
-            border: 1px solid rgba(99, 102, 241, 0.12);
-        }
+        /* MURAL */
+        .nova-mensagem { background: var(--caixa); border-radius: 16px; padding: 20px; margin-bottom: 22px; border: 1px solid rgba(99, 102, 241, 0.12); }
         .nova-mensagem textarea {
-            width: 100%;
-            min-height: 80px;
-            padding: 13px;
-            border-radius: 10px;
-            border: 1px solid #2d2d4a;
-            background: var(--caixa-clara);
-            color: white;
-            font-size: 15px;
-            resize: vertical;
-            font-family: inherit;
+            width: 100%; min-height: 80px; padding: 13px; border-radius: 10px;
+            border: 1px solid #2d2d4a; background: var(--caixa-clara); color: white;
+            font-size: 15px; resize: vertical; font-family: inherit;
         }
-        .nova-mensagem textarea:focus {
-            outline: none;
-            border-color: var(--destaque);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-        }
+        .nova-mensagem textarea:focus { outline: none; border-color: var(--destaque); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2); }
         .botoes-midia { display: flex; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
         .botao-midia {
-            background: #2d2d4a;
-            border: 1px solid #3d3d5a;
-            color: var(--texto);
-            padding: 9px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            font-family: inherit;
+            background: #2d2d4a; border: 1px solid #3d3d5a; color: var(--texto);
+            padding: 9px 15px; border-radius: 8px; cursor: pointer;
+            font-size: 14px; transition: all 0.2s ease; font-family: inherit;
         }
         .botao-midia:hover { background: #3d3d6a; border-color: var(--destaque); }
+        .botao-midia.ativo { background: var(--primario); border-color: transparent; color: white; }
+
+        .seletor-voz {
+            display: flex; gap: 10px; margin: 12px 0;
+            padding: 12px; background: var(--caixa-clara);
+            border-radius: 10px; border: 1px solid #2d2d4a;
+            flex-wrap: wrap; align-items: center;
+        }
+        .seletor-voz .label { color: var(--texto-suave); font-size: 13px; font-weight: 500; }
+        .btn-voz-opcao {
+            background: #2d2d4a; border: 2px solid transparent; color: var(--texto);
+            padding: 8px 16px; border-radius: 20px; cursor: pointer;
+            font-size: 13px; transition: all 0.2s ease; font-weight: 500;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .btn-voz-opcao:hover { background: #3d3d6a; }
+        .btn-voz-opcao.selecionado {
+            background: var(--primario); color: white; border-color: white;
+        }
 
         .mensagem {
-            background: var(--caixa);
-            border-radius: 14px;
-            padding: 16px 18px;
-            margin-bottom: 14px;
-            border-left: 4px solid var(--destaque);
-            animation: aparece 0.35s ease;
-            border: 1px solid rgba(255,255,255,0.04);
+            background: var(--caixa); border-radius: 14px; padding: 16px 18px;
+            margin-bottom: 14px; border-left: 4px solid var(--destaque);
+            animation: aparece 0.35s ease; border: 1px solid rgba(255,255,255,0.04);
         }
         @keyframes aparece { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .cabecalho-msg { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .autor {
-            font-weight: 600;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 15px;
-        }
-        .autor img {
-            width: 38px; height: 38px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--destaque);
-        }
-        .horario { font-size: 12px; color: #888; display: flex; align-items: center; gap: 6px; }
+        .cabecalho-msg { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 6px; }
+        .autor { font-weight: 600; color: white; display: flex; align-items: center; gap: 10px; font-size: 15px; }
+        .autor img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid var(--destaque); }
+        .horario { font-size: 12px; color: #888; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
         .conteudo-msg { line-height: 1.55; word-break: break-word; color: #d8d8e8; }
         .conteudo-msg img, .conteudo-msg video { max-width: 100%; border-radius: 10px; margin-top: 8px; }
+
+        .tag-ia {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: rgba(236, 72, 153, 0.15); color: #ec4899;
+            padding: 3px 9px; border-radius: 12px; font-size: 11px;
+            font-weight: 600; margin-top: 8px;
+        }
+        .btn-ouvir {
+            background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981; padding: 5px 12px; border-radius: 15px;
+            cursor: pointer; font-size: 12px; font-weight: 600;
+            margin-top: 8px; transition: all 0.2s ease;
+            display: inline-flex; align-items: center; gap: 5px;
+        }
+        .btn-ouvir:hover { background: #10b981; color: white; }
+
         .btn-excluir {
             background: none; border: none; color: var(--perigo);
             font-size: 13px; cursor: pointer; padding: 4px 8px; border-radius: 6px;
         }
         .btn-excluir:hover { background: rgba(231, 76, 60, 0.18); }
 
-        /* ===== PERFIL COMPLETO ===== */
-        .perfil-card {
-            background: var(--caixa);
-            border-radius: 18px;
-            padding: 32px;
-            text-align: center;
-            border: 1px solid rgba(99, 102, 241, 0.15);
-        }
-        .perfil-card img {
-            width: 130px; height: 130px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--destaque);
-            margin-bottom: 18px;
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
-        }
+        /* PERFIL */
+        .perfil-card { background: var(--caixa); border-radius: 18px; padding: 32px; text-align: center; border: 1px solid rgba(99, 102, 241, 0.15); }
+        .perfil-card img { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 4px solid var(--destaque); margin-bottom: 18px; box-shadow: 0 0 30px rgba(99, 102, 241, 0.4); }
         .perfil-card h2 { font-size: 26px; color: white; margin-bottom: 12px; }
         .perfil-card p { margin: 10px 0; color: #bbb; font-size: 15px; }
         .perfil-card p span { color: white; font-weight: 500; }
 
-        /* ===== LISTA DE CONTATOS/AMIGOS ===== */
+        /* LISTA */
         .item-lista {
-            background: var(--caixa);
-            border-radius: 12px;
-            padding: 15px 18px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            transition: all 0.2s ease;
+            background: var(--caixa); border-radius: 12px; padding: 15px 18px;
+            margin-bottom: 10px; display: flex; align-items: center;
+            justify-content: space-between; border: 1px solid rgba(99, 102, 241, 0.1);
+            transition: all 0.2s ease; gap: 10px; flex-wrap: wrap;
         }
         .item-lista:hover { border-color: var(--destaque); transform: translateX(3px); }
         .item-lista .info-user { display: flex; align-items: center; gap: 12px; }
@@ -444,31 +265,28 @@
         .item-lista .nome { color: white; font-weight: 600; font-size: 15px; }
         .item-lista .sub { color: var(--texto-suave); font-size: 12px; }
         .btn-acao {
-            background: var(--primario);
-            border: none;
-            color: white;
-            padding: 7px 16px;
-            border-radius: 18px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            transition: all 0.2s ease;
+            background: var(--primario); border: none; color: white;
+            padding: 7px 16px; border-radius: 18px; cursor: pointer;
+            font-size: 13px; font-weight: 600; transition: all 0.2s ease;
         }
         .btn-acao:hover { transform: scale(1.05); box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4); }
+        .btn-acao.perigo { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .btn-acao.perigo:hover { box-shadow: 0 4px 14px rgba(231, 76, 60, 0.4); }
 
         /* Rodapé */
-        footer {
-            text-align: center;
-            padding: 25px 20px;
-            color: #6b6b8a;
-            font-size: 13px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            margin-top: 40px;
-        }
+        footer { text-align: center; padding: 25px 20px; color: #6b6b8a; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px; }
         footer strong { color: var(--destaque); font-weight: 600; }
         footer .empresa { color: #ec4899; font-weight: 600; }
 
-        /* Responsivo */
+        /* Aviso de exclusão */
+        .aviso-excluir {
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            border-radius: 12px; padding: 16px; margin-bottom: 16px;
+            color: #ff8a80; font-size: 13px;
+            display: flex; align-items: flex-start; gap: 10px;
+        }
+
         @media(max-width: 600px) {
             main { padding: 0 12px; margin-top: 85px; }
             .logo { font-size: 18px; letter-spacing: 2px; }
@@ -478,7 +296,6 @@
             .tela-header h2 { font-size: 18px; }
             .lista-usuarios { grid-template-columns: 1fr; }
         }
-
         .escondido { display: none !important; }
     </style>
 </head>
@@ -488,27 +305,23 @@
     <div class="nav">
         <h1 class="logo" onclick="irPara('telaInicial')">WHASHAT <span>TV Nova Juarez</span></h1>
         <div class="nav-botoes">
-            <button onclick="irPara('telaInicial')" id="btnHome">🏠 Início</button>
-            <button onclick="sairDaRede()" id="btnSair" class="escondido">🚪 Sair</button>
+            <button onclick="irPara('telaInicial')">🏠 Início</button>
         </div>
     </div>
 </header>
 
 <main>
 
-    <!-- ==================== TELA 1: INICIAL (LISTA DE USUÁRIOS) ==================== -->
+    <!-- ============ TELA 1: INICIAL ============ -->
     <section id="telaInicial" class="tela ativa">
         <div class="boas-vindas">
             <h1>Bem-vindo ao WHASHAT</h1>
             <p>Clique em um nome para entrar na rede dessa pessoa 👇</p>
         </div>
-
-        <div class="lista-usuarios" id="listaUsuarios">
-            <!-- Usuários cadastrados aparecerão aqui -->
-        </div>
+        <div class="lista-usuarios" id="listaUsuarios"></div>
     </section>
 
-    <!-- ==================== TELA 2: CADASTRO ==================== -->
+    <!-- ============ TELA 2: CADASTRO ============ -->
     <section id="telaCadastro" class="tela">
         <div class="tela-header">
             <h2>✨ Criar Novo Cadastro</h2>
@@ -520,16 +333,23 @@
             <input type="text" id="usuarioCidade" placeholder="Sua cidade">
             <input type="number" id="usuarioIdade" placeholder="Sua idade">
             <input type="text" id="usuarioRelacionamento" placeholder="Relacionamento (ex: Solteiro)">
-            <input type="text" id="usuarioFoto" placeholder="Link da sua foto de perfil (opcional)">
+
+            <label>📸 Foto de Perfil</label>
+            <div class="upload-foto-area">
+                <img id="previewFotoPerfil" src="https://via.placeholder.com/60/6366f1/ffffff?text=👤" alt="Prévia">
+                <label class="btn-upload" for="inputFotoPerfil" style="cursor:pointer;">📁 Escolher do Aparelho</label>
+                <input type="file" accept="image/*" id="inputFotoPerfil" style="display:none;" onchange="carregarFotoPerfil(this)">
+            </div>
+
             <button class="btn-principal" onclick="cadastrarUsuario()">🚀 Criar Minha Rede</button>
         </div>
     </section>
 
-    <!-- ==================== TELA 3: MENU DA REDE ==================== -->
+    <!-- ============ TELA 3: MENU DA REDE ============ -->
     <section id="telaMenuRede" class="tela">
         <div class="tela-header">
             <h2>🌐 Minha Rede</h2>
-            <button class="btn-voltar" onclick="sairDaRede()">← Sair da Rede</button>
+            <button class="btn-voltar" onclick="irPara('telaInicial')">🏠 Início</button>
         </div>
 
         <div class="perfil-topo">
@@ -554,25 +374,20 @@
                 <div class="titulo">Amigos</div>
                 <div class="descricao">Lista de contatos</div>
             </div>
-            <div class="opcao-menu" onclick="irPara('telaChamadas')">
-                <div class="icone">📞</div>
-                <div class="titulo">Chamadas</div>
-                <div class="descricao">Voz e vídeo</div>
-            </div>
             <div class="opcao-menu" onclick="irPara('telaConfig')">
                 <div class="icone">⚙️</div>
                 <div class="titulo">Configurações</div>
                 <div class="descricao">Ajustes da conta</div>
             </div>
-            <div class="opcao-menu" onclick="sairDaRede()">
-                <div class="icone">🚪</div>
-                <div class="titulo">Sair</div>
-                <div class="descricao">Voltar à tela inicial</div>
+            <div class="opcao-menu" onclick="irPara('telaExcluir')">
+                <div class="icone">🗑️</div>
+                <div class="titulo">Excluir Conta</div>
+                <div class="descricao">Apagar tudo</div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== TELA 4: MURAL ==================== -->
+    <!-- ============ TELA 4: MURAL ============ -->
     <section id="telaMural" class="tela">
         <div class="tela-header">
             <h2>📢 Mural de Mensagens</h2>
@@ -581,19 +396,28 @@
 
         <div class="nova-mensagem">
             <textarea id="caixaMsg" placeholder="Escreva sua mensagem aqui..."></textarea>
+
             <div class="botoes-midia">
-                <label class="botao-midia" style="cursor: pointer;">📷 Foto<input type="file" accept="image/*" id="enviaFoto" style="display: none;" onchange="previaFoto(this)"></label>
-                <label class="botao-midia" style="cursor: pointer;">🎥 Vídeo<input type="file" accept="video/*" id="enviaVideo" style="display: none;" onchange="previaVideo(this)"></label>
-                <button class="botao-midia" onclick="gravarAudio()">🎙️ Áudio</button>
+                <label class="botao-midia" style="cursor:pointer;">📷 Foto<input type="file" accept="image/*" id="enviaFoto" style="display:none;" onchange="previaFoto(this)"></label>
+                <label class="botao-midia" style="cursor:pointer;">🎥 Vídeo<input type="file" accept="video/*" id="enviaVideo" style="display:none;" onchange="previaVideo(this)"></label>
             </div>
-            <div id="previewMidia" style="margin: 10px 0;"></div>
+
+            <!-- Seletor de voz IA -->
+            <div class="seletor-voz" id="seletorVoz">
+                <span class="label">🎙️ Enviar como áudio IA:</span>
+                <button class="btn-voz-opcao" data-voz="mulher" onclick="selecionarVoz(this)">👩 Mulher</button>
+                <button class="btn-voz-opcao" data-voz="homem" onclick="selecionarVoz(this)">👨 Homem</button>
+                <button class="btn-voz-opcao selecionado" data-voz="texto" onclick="selecionarVoz(this)">📝 Só Texto</button>
+            </div>
+
+            <div id="previewMidia" style="margin:10px 0;"></div>
             <button class="btn-principal" onclick="enviarMensagem()">📤 Publicar no Mural</button>
         </div>
 
         <div id="listaMensagens"></div>
     </section>
 
-    <!-- ==================== TELA 5: PERFIL ==================== -->
+    <!-- ============ TELA 5: PERFIL ============ -->
     <section id="telaPerfil" class="tela">
         <div class="tela-header">
             <h2>👤 Meu Perfil</h2>
@@ -606,47 +430,19 @@
             <p>📍 Cidade: <span id="cidadePerfil"></span></p>
             <p>🎂 Idade: <span id="idadePerfil"></span> anos</p>
             <p>💑 Relacionamento: <span id="relPerfil"></span></p>
-            <p style="margin-top: 22px; font-size: 13px; color: #777;">Perfil público — outros usuários podem ver estes dados</p>
         </div>
     </section>
 
-    <!-- ==================== TELA 6: AMIGOS ==================== -->
+    <!-- ============ TELA 6: AMIGOS ============ -->
     <section id="telaAmigos" class="tela">
         <div class="tela-header">
             <h2>👥 Lista de Amigos</h2>
             <button class="btn-voltar" onclick="irPara('telaMenuRede')">← Voltar</button>
         </div>
-
         <div id="listaAmigos"></div>
     </section>
 
-    <!-- ==================== TELA 7: CHAMADAS ==================== -->
-    <section id="telaChamadas" class="tela">
-        <div class="tela-header">
-            <h2>📞 Chamadas</h2>
-            <button class="btn-voltar" onclick="irPara('telaMenuRede')">← Voltar</button>
-        </div>
-
-        <div class="menu-grade">
-            <div class="opcao-menu" onclick="alert('📞 Iniciando chamada de voz...')">
-                <div class="icone">📞</div>
-                <div class="titulo">Chamada de Voz</div>
-                <div class="descricao">Ligar para um amigo</div>
-            </div>
-            <div class="opcao-menu" onclick="alert('📹 Iniciando chamada de vídeo...')">
-                <div class="icone">📹</div>
-                <div class="titulo">Chamada de Vídeo</div>
-                <div class="descricao">Vídeo em tempo real</div>
-            </div>
-            <div class="opcao-menu" onclick="alert('📋 Histórico de chamadas')">
-                <div class="icone">📋</div>
-                <div class="titulo">Histórico</div>
-                <div class="descricao">Chamadas recentes</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== TELA 8: CONFIGURAÇÕES ==================== -->
+    <!-- ============ TELA 7: CONFIGURAÇÕES ============ -->
     <section id="telaConfig" class="tela">
         <div class="tela-header">
             <h2>⚙️ Configurações</h2>
@@ -655,7 +451,7 @@
 
         <div class="item-lista">
             <div class="info-user">
-                <span style="font-size: 24px;">🔔</span>
+                <span style="font-size:24px;">🔔</span>
                 <div>
                     <div class="nome">Notificações</div>
                     <div class="sub">Ativar alertas</div>
@@ -665,33 +461,52 @@
         </div>
         <div class="item-lista">
             <div class="info-user">
-                <span style="font-size: 24px;">🔒</span>
-                <div>
-                    <div class="nome">Privacidade</div>
-                    <div class="sub">Controlar visibilidade</div>
-                </div>
-            </div>
-            <button class="btn-acao" onclick="alert('Configurações de privacidade')">Abrir</button>
-        </div>
-        <div class="item-lista">
-            <div class="info-user">
-                <span style="font-size: 24px;">🌙</span>
-                <div>
-                    <div class="nome">Tema Escuro</div>
-                    <div class="sub">Sempre ativo</div>
-                </div>
-            </div>
-            <button class="btn-acao" onclick="alert('Tema escuro já está ativo!')">Ativo</button>
-        </div>
-        <div class="item-lista">
-            <div class="info-user">
-                <span style="font-size: 24px;">ℹ️</span>
+                <span style="font-size:24px;">ℹ️</span>
                 <div>
                     <div class="nome">Sobre o WHASHAT</div>
-                    <div class="sub">Versão 1.0 — TV Nova Juarez</div>
+                    <div class="sub">Versão 2.0 — TV Nova Juarez</div>
                 </div>
             </div>
-            <button class="btn-acao" onclick="alert('WHASHAT — Criado por Rafael Edgley\\nEmpresa: TV Nova Juarez\\nVersão 1.0')">Ver</button>
+            <button class="btn-acao" onclick="alert('WHASHAT — Criado por Rafael Edgley\\nEmpresa: TV Nova Juarez\\nVersão 2.0')">Ver</button>
+        </div>
+    </section>
+
+    <!-- ============ TELA 8: EXCLUIR CONTA ============ -->
+    <section id="telaExcluir" class="tela">
+        <div class="tela-header">
+            <h2>🗑️ Excluir Conta</h2>
+            <button class="btn-voltar" onclick="irPara('telaMenuRede')">← Voltar</button>
+        </div>
+
+        <div class="aviso-excluir">
+            <span>⚠️</span>
+            <div>
+                <strong>Atenção!</strong> Para excluir sua conta você precisa primeiro
+                <strong>apagar todas as suas mensagens do mural</strong>. Isso é obrigatório
+                para confirmar que você realmente deseja sair.
+            </div>
+        </div>
+
+        <div class="item-lista">
+            <div class="info-user">
+                <span style="font-size:24px;">📢</span>
+                <div>
+                    <div class="nome">Mensagens no Mural</div>
+                    <div class="sub" id="contadorMsg">0 mensagens</div>
+                </div>
+            </div>
+            <button class="btn-acao" onclick="apagarTodasMensagens()" id="btnApagarMsgs">Apagar Todas</button>
+        </div>
+
+        <div class="item-lista">
+            <div class="info-user">
+                <span style="font-size:24px;">👤</span>
+                <div>
+                    <div class="nome">Excluir Cadastro</div>
+                    <div class="sub">Remover permanentemente</div>
+                </div>
+            </div>
+            <button class="btn-acao perigo" onclick="excluirConta()" id="btnExcluirConta">Excluir Conta</button>
         </div>
     </section>
 
@@ -704,31 +519,38 @@
 
 <script>
 // ============ ESTADO GLOBAL ============
-let usuariosCadastrados = []; // Lista de todos os usuários
-let usuarioAtual = null;      // Usuário logado atualmente
+let usuariosCadastrados = [];
+let usuarioAtual = null;
 let midiaParaEnviar = { tipo: null, dados: null };
-let mensagens = [];           // Mensagens do mural
+let fotoPerfilTemp = null;
+let vozSelecionada = 'texto';
+let mensagens = [];
 
-// ============ NAVEGAÇÃO ENTRE TELAS ============
+// ============ NAVEGAÇÃO ============
 function irPara(idTela) {
     document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
     document.getElementById(idTela).classList.add('ativa');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (idTela === 'telaExcluir') atualizarContadorMsg();
 }
 
-// ============ CARREGAR USUÁRIOS (do localStorage) ============
+// ============ CARREGAR USUÁRIOS ============
 function carregarUsuarios() {
     const dados = localStorage.getItem('whashat_usuarios');
     usuariosCadastrados = dados ? JSON.parse(dados) : [];
     renderizarListaUsuarios();
 }
 
-// ============ RENDERIZAR LISTA DE USUÁRIOS NA TELA INICIAL ============
+function salvarUsuarios() {
+    localStorage.setItem('whashat_usuarios', JSON.stringify(usuariosCadastrados));
+}
+
+// ============ LISTA DE USUÁRIOS NA TELA INICIAL ============
 function renderizarListaUsuarios() {
     const container = document.getElementById('listaUsuarios');
     container.innerHTML = '';
 
-    // Cartões dos usuários cadastrados
     usuariosCadastrados.forEach(user => {
         const card = document.createElement('div');
         card.className = 'cartao-usuario';
@@ -742,15 +564,27 @@ function renderizarListaUsuarios() {
         container.appendChild(card);
     });
 
-    // Cartão para criar novo cadastro
     const cardNovo = document.createElement('div');
     cardNovo.className = 'btn-novo-cadastro';
-    cardNovo.innerHTML = `
-        <span class="mais">＋</span>
-        <span>Criar Novo Cadastro</span>
-    `;
-    cardNovo.onclick = () => irPara('telaCadastro');
+    cardNovo.innerHTML = `<span class="mais">＋</span><span>Criar Novo Cadastro</span>`;
+    cardNovo.onclick = () => {
+        fotoPerfilTemp = null;
+        document.getElementById('previewFotoPerfil').src = 'https://via.placeholder.com/60/6366f1/ffffff?text=👤';
+        irPara('telaCadastro');
+    };
     container.appendChild(cardNovo);
+}
+
+// ============ FOTO DO APARELHO ============
+function carregarFotoPerfil(input) {
+    if (input.files && input.files[0]) {
+        const leitor = new FileReader();
+        leitor.onload = function(e) {
+            fotoPerfilTemp = e.target.result;
+            document.getElementById('previewFotoPerfil').src = e.target.result;
+        };
+        leitor.readAsDataURL(input.files[0]);
+    }
 }
 
 // ============ CADASTRAR USUÁRIO ============
@@ -759,20 +593,19 @@ function cadastrarUsuario() {
     const cidade = document.getElementById('usuarioCidade').value.trim();
     const idade = document.getElementById('usuarioIdade').value;
     const relacionamento = document.getElementById('usuarioRelacionamento').value.trim();
-    let foto = document.getElementById('usuarioFoto').value.trim();
 
     if (!nome || !cidade || !idade) {
         alert('⚠️ Preencha pelo menos: nome, cidade e idade!');
         return;
     }
 
-    // Verificar se já existe
     if (usuariosCadastrados.some(u => u.nome.toLowerCase() === nome.toLowerCase())) {
         alert('⚠️ Já existe um usuário com esse nome! Escolha outro.');
         return;
     }
 
-    if (!foto || !foto.startsWith('http')) {
+    let foto = fotoPerfilTemp;
+    if (!foto) {
         foto = 'https://via.placeholder.com/100/6366f1/ffffff?text=' + nome.charAt(0).toUpperCase();
     }
 
@@ -784,65 +617,42 @@ function cadastrarUsuario() {
     };
 
     usuariosCadastrados.push(novoUsuario);
-    localStorage.setItem('whashat_usuarios', JSON.stringify(usuariosCadastrados));
+    salvarUsuarios();
 
-    // Limpar formulário
+    // Limpar
     document.getElementById('usuarioNome').value = '';
     document.getElementById('usuarioCidade').value = '';
     document.getElementById('usuarioIdade').value = '';
     document.getElementById('usuarioRelacionamento').value = '';
-    document.getElementById('usuarioFoto').value = '';
+    document.getElementById('inputFotoPerfil').value = '';
+    fotoPerfilTemp = null;
 
-    alert(`✅ Cadastro de "${nome}" criado com sucesso!`);
+    alert(`✅ Cadastro de "${nome}" criado com sucesso!\nEle ficará visível permanentemente na tela inicial.`);
     renderizarListaUsuarios();
     irPara('telaInicial');
 }
 
-// ============ ENTRAR NA REDE DE UM USUÁRIO ============
+// ============ ENTRAR NA REDE ============
 function entrarNaRede(user) {
     usuarioAtual = user;
     mensagens = user.mensagens || [];
 
-    // Atualizar cabeçalho
-    document.getElementById('btnSair').classList.remove('escondido');
-
-    // Preencher menu da rede
     document.getElementById('menuFotoPerfil').src = user.foto;
     document.getElementById('menuNomePerfil').textContent = user.nome;
     document.getElementById('menuInfoPerfil').textContent = `📍 ${user.cidade} • ${user.idade} anos`;
 
-    // Preencher perfil
     document.getElementById('fotoPerfil').src = user.foto;
     document.getElementById('nomePerfil').textContent = user.nome;
     document.getElementById('cidadePerfil').textContent = user.cidade;
     document.getElementById('idadePerfil').textContent = user.idade;
     document.getElementById('relPerfil').textContent = user.relacionamento || 'Não informado';
 
-    // Renderizar amigos (outros usuários)
     renderizarAmigos();
-
-    // Renderizar mensagens
     renderizarMensagens();
-
-    // Ir para o menu da rede
     irPara('telaMenuRede');
 }
 
-// ============ SAIR DA REDE ============
-function sairDaRede() {
-    if (!usuarioAtual) {
-        irPara('telaInicial');
-        return;
-    }
-    if (confirm(`Deseja sair da rede de ${usuarioAtual.nome}?`)) {
-        usuarioAtual = null;
-        mensagens = [];
-        document.getElementById('btnSair').classList.add('escondido');
-        irPara('telaInicial');
-    }
-}
-
-// ============ RENDERIZAR AMIGOS ============
+// ============ AMIGOS ============
 function renderizarAmigos() {
     const container = document.getElementById('listaAmigos');
     container.innerHTML = '';
@@ -850,7 +660,7 @@ function renderizarAmigos() {
     const outros = usuariosCadastrados.filter(u => u.id !== usuarioAtual.id);
 
     if (outros.length === 0) {
-        container.innerHTML = `<p style="text-align:center; color:#6b6b8a; padding:30px;">Nenhum amigo cadastrado ainda. Crie mais cadastros! 👥</p>`;
+        container.innerHTML = `<p style="text-align:center; color:#6b6b8a; padding:30px;">Nenhum amigo cadastrado ainda. 👥</p>`;
         return;
     }
 
@@ -868,15 +678,13 @@ function renderizarAmigos() {
             <button class="btn-acao">Visitar</button>
         `;
         item.querySelector('.btn-acao').onclick = () => {
-            if (confirm(`Visitar a rede de ${amigo.nome}?`)) {
-                entrarNaRede(amigo);
-            }
+            if (confirm(`Visitar a rede de ${amigo.nome}?`)) entrarNaRede(amigo);
         };
         container.appendChild(item);
     });
 }
 
-// ============ PRÉVIA DE MÍDIA ============
+// ============ MÍDIA ============
 function previaFoto(input) {
     if (input.files && input.files[0]) {
         const leitor = new FileReader();
@@ -901,8 +709,35 @@ function previaVideo(input) {
     }
 }
 
-function gravarAudio() {
-    alert('🎙️ Gravação de áudio — em uma versão completa, isso abriria o gravador de voz!');
+// ============ SELETOR DE VOZ IA ============
+function selecionarVoz(botao) {
+    document.querySelectorAll('.btn-voz-opcao').forEach(b => b.classList.remove('selecionado'));
+    botao.classList.add('selecionado');
+    vozSelecionada = botao.dataset.voz;
+}
+
+// ============ FALAR COM IA (Text-to-Speech) ============
+function falarComIA(texto, genero) {
+    if (!('speechSynthesis' in window)) {
+        alert('⚠️ Seu navegador não suporta síntese de voz.');
+        return;
+    }
+
+    // Cancela falas anteriores
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(texto);
+    utterance.lang = 'pt-BR';
+    utterance.rate = genero === 'mulher' ? 1.0 : 0.9;
+    utterance.pitch = genero === 'mulher' ? 1.4 : 0.6;
+    utterance.volume = 1.0;
+
+    // Tenta escolher uma voz em português mais adequada
+    const vozes = window.speechSynthesis.getVoices();
+    const vozPT = vozes.find(v => v.lang.startsWith('pt'));
+    if (vozPT) utterance.voice = vozPT;
+
+    window.speechSynthesis.speak(utterance);
 }
 
 // ============ ENVIAR MENSAGEM ============
@@ -922,22 +757,26 @@ function enviarMensagem() {
         fotoAutor: usuarioAtual.foto,
         texto: texto,
         midia: midiaParaEnviar,
+        vozIA: vozSelecionada, // 'mulher', 'homem' ou 'texto'
         horario: new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'})
     };
 
     mensagens.unshift(novaMsg);
     usuarioAtual.mensagens = mensagens;
 
-    // Salvar no localStorage
     const idx = usuariosCadastrados.findIndex(u => u.id === usuarioAtual.id);
     if (idx !== -1) {
         usuariosCadastrados[idx].mensagens = mensagens;
-        localStorage.setItem('whashat_usuarios', JSON.stringify(usuariosCadastrados));
+        salvarUsuarios();
     }
 
     renderizarMensagens();
 
-    // Limpar
+    // Se for áudio IA, já fala automaticamente
+    if (vozSelecionada !== 'texto' && texto) {
+        falarComIA(texto, vozSelecionada);
+    }
+
     document.getElementById('caixaMsg').value = '';
     document.getElementById('previewMidia').innerHTML = '';
     midiaParaEnviar = { tipo: null, dados: null };
@@ -963,6 +802,17 @@ function renderizarMensagens() {
             conteudo += `<br><video controls src="${msg.midia.dados}" style="max-width:100%; border-radius:8px;"></video>`;
         }
 
+        // Tag IA + botão de ouvir
+        let extras = '';
+        if (msg.vozIA === 'mulher' || msg.vozIA === 'homem') {
+            const emoji = msg.vozIA === 'mulher' ? '👩' : '👨';
+            const nome = msg.vozIA === 'mulher' ? 'Mulher IA' : 'Homem IA';
+            extras = `
+                <div class="tag-ia">${emoji} Áudio gerado por IA — ${nome}</div><br>
+                <button class="btn-ouvir" onclick="falarComIA('${msg.texto.replace(/'/g, "\\'").replace(/"/g, '&quot;')}', '${msg.vozIA}')">🔊 Ouvir novamente</button>
+            `;
+        }
+
         const div = document.createElement('div');
         div.className = 'mensagem';
         div.innerHTML = `
@@ -976,6 +826,7 @@ function renderizarMensagens() {
                 </span>
             </div>
             <div class="conteudo-msg">${conteudo}</div>
+            ${extras}
         `;
         container.appendChild(div);
     });
@@ -989,9 +840,65 @@ function excluirMsg(id) {
         const idx = usuariosCadastrados.findIndex(u => u.id === usuarioAtual.id);
         if (idx !== -1) {
             usuariosCadastrados[idx].mensagens = mensagens;
-            localStorage.setItem('whashat_usuarios', JSON.stringify(usuariosCadastrados));
+            salvarUsuarios();
         }
         renderizarMensagens();
+    }
+}
+
+// ============ CONTADOR DE MENSAGENS (para exclusão) ============
+function atualizarContadorMsg() {
+    const qtd = mensagens.length;
+    document.getElementById('contadorMsg').textContent = `${qtd} mensagem(ns)`;
+    const btnApagar = document.getElementById('btnApagarMsgs');
+    const btnExcluir = document.getElementById('btnExcluirConta');
+
+    if (qtd === 0) {
+        btnApagar.disabled = true;
+        btnApagar.style.opacity = '0.5';
+        btnApagar.textContent = '✓ Sem mensagens';
+        btnExcluir.disabled = false;
+        btnExcluir.style.opacity = '1';
+    } else {
+        btnApagar.disabled = false;
+        btnApagar.style.opacity = '1';
+        btnApagar.textContent = 'Apagar Todas';
+        btnExcluir.disabled = true;
+        btnExcluir.style.opacity = '0.5';
+    }
+}
+
+function apagarTodasMensagens() {
+    if (mensagens.length === 0) return;
+    if (confirm('Apagar TODAS as suas mensagens do mural? Esta ação não pode ser desfeita.')) {
+        mensagens = [];
+        usuarioAtual.mensagens = [];
+        const idx = usuariosCadastrados.findIndex(u => u.id === usuarioAtual.id);
+        if (idx !== -1) {
+            usuariosCadastrados[idx].mensagens = [];
+            salvarUsuarios();
+        }
+        renderizarMensagens();
+        atualizarContadorMsg();
+        alert('✅ Todas as mensagens foram apagadas.');
+    }
+}
+
+// ============ EXCLUIR CONTA ============
+function excluirConta() {
+    if (mensagens.length > 0) {
+        alert('⚠️ Você precisa apagar TODAS as mensagens antes de excluir a conta!');
+        return;
+    }
+
+    if (confirm(`Tem certeza que deseja EXCLUIR PERMANENTEMENTE o cadastro de "${usuarioAtual.nome}"?\n\nEsta ação não pode ser desfeita.`)) {
+        usuariosCadastrados = usuariosCadastrados.filter(u => u.id !== usuarioAtual.id);
+        salvarUsuarios();
+        usuarioAtual = null;
+        mensagens = [];
+        alert('✅ Cadastro excluído com sucesso.');
+        renderizarListaUsuarios();
+        irPara('telaInicial');
     }
 }
 
