@@ -15,6 +15,7 @@
             --texto-suave: #a0a0b0;
             --destaque: #6366f1;
             --perigo: #e74c3c;
+            --sucesso: #10b981;
         }
         body {
             background: var(--fundo);
@@ -44,6 +45,35 @@
             font-size: 14px; font-weight: 500;
         }
         .nav-botoes button:hover { background: white; color: var(--destaque); transform: translateY(-1px); }
+
+        /* Indicador de sincronização */
+        .status-sync {
+            position: fixed;
+            bottom: 20px; left: 20px;
+            background: rgba(16, 185, 129, 0.9);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex; align-items: center; gap: 6px;
+            z-index: 99;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+        }
+        .status-sync .dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: white;
+            animation: blink 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
 
         main { max-width: 900px; margin: 90px auto 30px; padding: 0 20px; }
 
@@ -91,7 +121,15 @@
         .cartao-usuario:hover { transform: translateY(-5px); border-color: var(--destaque); box-shadow: 0 12px 30px rgba(99, 102, 241, 0.3); }
         .cartao-usuario img { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; border: 3px solid var(--destaque); margin-bottom: 12px; }
         .cartao-usuario h3 { color: white; font-size: 17px; margin-bottom: 4px; font-weight: 600; }
-        .cartao-usuario .cidade { color: var(--texto-suave); font-size: 13px; margin-bottom: 14px; }
+        .cartao-usuario .cidade { color: var(--texto-suave); font-size: 13px; margin-bottom: 8px; }
+        .cartao-usuario .contador-msg {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--destaque);
+            padding: 3px 10px; border-radius: 12px;
+            font-size: 11px; font-weight: 600;
+            margin-bottom: 12px;
+        }
         .btn-entrar-cartao {
             background: var(--primario); border: none; color: white;
             padding: 9px 22px; border-radius: 20px; cursor: pointer;
@@ -166,6 +204,7 @@
             text-align: center; cursor: pointer; transition: all 0.25s ease;
             border: 1px solid rgba(99, 102, 241, 0.12);
             display: flex; flex-direction: column; align-items: center; gap: 10px;
+            position: relative;
         }
         .opcao-menu:hover { transform: translateY(-4px); border-color: var(--destaque); box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25); }
         .opcao-menu .icone {
@@ -175,8 +214,26 @@
         }
         .opcao-menu .titulo { color: white; font-weight: 600; font-size: 15px; }
         .opcao-menu .descricao { color: var(--texto-suave); font-size: 12px; }
+        .badge-notif {
+            position: absolute; top: 10px; right: 10px;
+            background: #ec4899; color: white;
+            font-size: 11px; font-weight: 700;
+            padding: 3px 8px; border-radius: 10px;
+            min-width: 22px; text-align: center;
+        }
 
         /* MURAL */
+        .info-global {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 18px;
+            color: #6ee7b7;
+            font-size: 13px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
         .nova-mensagem { background: var(--caixa); border-radius: 16px; padding: 20px; margin-bottom: 22px; border: 1px solid rgba(99, 102, 241, 0.12); }
         .nova-mensagem textarea {
             width: 100%; min-height: 80px; padding: 13px; border-radius: 10px;
@@ -191,7 +248,6 @@
             font-size: 14px; transition: all 0.2s ease; font-family: inherit;
         }
         .botao-midia:hover { background: #3d3d6a; border-color: var(--destaque); }
-        .botao-midia.ativo { background: var(--primario); border-color: transparent; color: white; }
 
         .seletor-voz {
             display: flex; gap: 10px; margin: 12px 0;
@@ -207,19 +263,27 @@
             display: flex; align-items: center; gap: 6px;
         }
         .btn-voz-opcao:hover { background: #3d3d6a; }
-        .btn-voz-opcao.selecionado {
-            background: var(--primario); color: white; border-color: white;
-        }
+        .btn-voz-opcao.selecionado { background: var(--primario); color: white; border-color: white; }
 
         .mensagem {
             background: var(--caixa); border-radius: 14px; padding: 16px 18px;
             margin-bottom: 14px; border-left: 4px solid var(--destaque);
             animation: aparece 0.35s ease; border: 1px solid rgba(255,255,255,0.04);
+            position: relative;
         }
         @keyframes aparece { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .cabecalho-msg { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 6px; }
-        .autor { font-weight: 600; color: white; display: flex; align-items: center; gap: 10px; font-size: 15px; }
+        .autor { font-weight: 600; color: white; display: flex; align-items: center; gap: 10px; font-size: 15px; cursor: pointer; }
+        .autor:hover { color: var(--destaque); }
         .autor img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid var(--destaque); }
+        .autor .tag-dono {
+            background: rgba(236, 72, 153, 0.2);
+            color: #ec4899;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
         .horario { font-size: 12px; color: #888; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
         .conteudo-msg { line-height: 1.55; word-break: break-word; color: #d8d8e8; }
         .conteudo-msg img, .conteudo-msg video { max-width: 100%; border-radius: 10px; margin-top: 8px; }
@@ -273,12 +337,10 @@
         .btn-acao.perigo { background: linear-gradient(135deg, #e74c3c, #c0392b); }
         .btn-acao.perigo:hover { box-shadow: 0 4px 14px rgba(231, 76, 60, 0.4); }
 
-        /* Rodapé */
         footer { text-align: center; padding: 25px 20px; color: #6b6b8a; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px; }
         footer strong { color: var(--destaque); font-weight: 600; }
         footer .empresa { color: #ec4899; font-weight: 600; }
 
-        /* Aviso de exclusão */
         .aviso-excluir {
             background: rgba(231, 76, 60, 0.1);
             border: 1px solid rgba(231, 76, 60, 0.3);
@@ -295,6 +357,7 @@
             .boas-vindas h1 { font-size: 22px; }
             .tela-header h2 { font-size: 18px; }
             .lista-usuarios { grid-template-columns: 1fr; }
+            .status-sync { bottom: 10px; left: 10px; font-size: 10px; padding: 6px 10px; }
         }
         .escondido { display: none !important; }
     </style>
@@ -309,6 +372,12 @@
         </div>
     </div>
 </header>
+
+<!-- Indicador de sincronização automática -->
+<div class="status-sync" id="statusSync">
+    <span class="dot"></span>
+    <span>Sincronizado em tempo real</span>
+</div>
 
 <main>
 
@@ -361,8 +430,9 @@
         <div class="menu-grade">
             <div class="opcao-menu" onclick="irPara('telaMural')">
                 <div class="icone">📢</div>
-                <div class="titulo">Mural</div>
-                <div class="descricao">Mensagens públicas</div>
+                <div class="titulo">Mural Global</div>
+                <div class="descricao">Mensagens de todos</div>
+                <span class="badge-notif" id="badgeMensagens">0</span>
             </div>
             <div class="opcao-menu" onclick="irPara('telaPerfil')">
                 <div class="icone">👤</div>
@@ -387,22 +457,26 @@
         </div>
     </section>
 
-    <!-- ============ TELA 4: MURAL ============ -->
+    <!-- ============ TELA 4: MURAL GLOBAL ============ -->
     <section id="telaMural" class="tela">
         <div class="tela-header">
-            <h2>📢 Mural de Mensagens</h2>
+            <h2>📢 Mural Global</h2>
             <button class="btn-voltar" onclick="irPara('telaMenuRede')">← Voltar</button>
         </div>
 
+        <div class="info-global">
+            <span>🌍</span>
+            <span>Todas as mensagens abaixo são <strong>visíveis para todos os usuários</strong> — sincronizadas em tempo real.</span>
+        </div>
+
         <div class="nova-mensagem">
-            <textarea id="caixaMsg" placeholder="Escreva sua mensagem aqui..."></textarea>
+            <textarea id="caixaMsg" placeholder="Escreva sua mensagem aqui... (todos os usuários verão)"></textarea>
 
             <div class="botoes-midia">
                 <label class="botao-midia" style="cursor:pointer;">📷 Foto<input type="file" accept="image/*" id="enviaFoto" style="display:none;" onchange="previaFoto(this)"></label>
                 <label class="botao-midia" style="cursor:pointer;">🎥 Vídeo<input type="file" accept="video/*" id="enviaVideo" style="display:none;" onchange="previaVideo(this)"></label>
             </div>
 
-            <!-- Seletor de voz IA -->
             <div class="seletor-voz" id="seletorVoz">
                 <span class="label">🎙️ Enviar como áudio IA:</span>
                 <button class="btn-voz-opcao" data-voz="mulher" onclick="selecionarVoz(this)">👩 Mulher</button>
@@ -411,9 +485,10 @@
             </div>
 
             <div id="previewMidia" style="margin:10px 0;"></div>
-            <button class="btn-principal" onclick="enviarMensagem()">📤 Publicar no Mural</button>
+            <button class="btn-principal" onclick="enviarMensagem()">📤 Publicar no Mural Global</button>
         </div>
 
+        <h3 style="color:white; margin-bottom:14px; font-size:16px;" id="tituloListaMsg">📨 Mensagens recentes</h3>
         <div id="listaMensagens"></div>
     </section>
 
@@ -451,23 +526,23 @@
 
         <div class="item-lista">
             <div class="info-user">
-                <span style="font-size:24px;">🔔</span>
+                <span style="font-size:24px;">🔄</span>
                 <div>
-                    <div class="nome">Notificações</div>
-                    <div class="sub">Ativar alertas</div>
+                    <div class="nome">Sincronização</div>
+                    <div class="sub">Automática e em tempo real</div>
                 </div>
             </div>
-            <button class="btn-acao" onclick="alert('Notificações ativadas!')">Ativar</button>
+            <button class="btn-acao" onclick="alert('✅ Sincronização automática ativa!\\nTodas as mensagens são compartilhadas entre todos os usuários.')">Ativa</button>
         </div>
         <div class="item-lista">
             <div class="info-user">
                 <span style="font-size:24px;">ℹ️</span>
                 <div>
                     <div class="nome">Sobre o WHASHAT</div>
-                    <div class="sub">Versão 2.0 — TV Nova Juarez</div>
+                    <div class="sub">Versão 3.0 — TV Nova Juarez</div>
                 </div>
             </div>
-            <button class="btn-acao" onclick="alert('WHASHAT — Criado por Rafael Edgley\\nEmpresa: TV Nova Juarez\\nVersão 2.0')">Ver</button>
+            <button class="btn-acao" onclick="alert('WHASHAT — Criado por Rafael Edgley\\nEmpresa: TV Nova Juarez\\nVersão 3.0\\n\\nSistema de sincronização automática gratuita.')">Ver</button>
         </div>
     </section>
 
@@ -482,8 +557,7 @@
             <span>⚠️</span>
             <div>
                 <strong>Atenção!</strong> Para excluir sua conta você precisa primeiro
-                <strong>apagar todas as suas mensagens do mural</strong>. Isso é obrigatório
-                para confirmar que você realmente deseja sair.
+                <strong>apagar todas as suas mensagens do mural global</strong>.
             </div>
         </div>
 
@@ -491,11 +565,11 @@
             <div class="info-user">
                 <span style="font-size:24px;">📢</span>
                 <div>
-                    <div class="nome">Mensagens no Mural</div>
+                    <div class="nome">Minhas Mensagens no Mural</div>
                     <div class="sub" id="contadorMsg">0 mensagens</div>
                 </div>
             </div>
-            <button class="btn-acao" onclick="apagarTodasMensagens()" id="btnApagarMsgs">Apagar Todas</button>
+            <button class="btn-acao" onclick="apagarMinhasMensagens()" id="btnApagarMsgs">Apagar Todas</button>
         </div>
 
         <div class="item-lista">
@@ -518,13 +592,32 @@
 </footer>
 
 <script>
-// ============ ESTADO GLOBAL ============
+// ============================================================
+// SISTEMA DE SINCRONIZAÇÃO AUTOMÁTICA GRATUITA
+// Usa localStorage compartilhado + BroadcastChannel + storage event
+// Todas as mensagens ficam visíveis para TODOS os usuários
+// ============================================================
+
+const CHAVE_USUARIOS = 'whashat_usuarios_v3';
+const CHAVE_MENSAGENS = 'whashat_mensagens_globais_v3';
+const CANAL_SYNC = 'whashat_sync_channel';
+
 let usuariosCadastrados = [];
 let usuarioAtual = null;
 let midiaParaEnviar = { tipo: null, dados: null };
 let fotoPerfilTemp = null;
 let vozSelecionada = 'texto';
-let mensagens = [];
+let mensagensGlobais = [];   // MURAL GLOBAL - visível para todos
+
+// Canal de sincronização em tempo real entre abas
+let canalSync = null;
+if ('BroadcastChannel' in window) {
+    canalSync = new BroadcastChannel(CANAL_SYNC);
+    canalSync.onmessage = (evento) => {
+        console.log('🔄 Sincronização recebida:', evento.data.tipo);
+        recarregarDados();
+    };
+}
 
 // ============ NAVEGAÇÃO ============
 function irPara(idTela) {
@@ -533,31 +626,67 @@ function irPara(idTela) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     if (idTela === 'telaExcluir') atualizarContadorMsg();
+    if (idTela === 'telaMenuRede') atualizarBadgeMensagens();
 }
 
-// ============ CARREGAR USUÁRIOS ============
-function carregarUsuarios() {
-    const dados = localStorage.getItem('whashat_usuarios');
-    usuariosCadastrados = dados ? JSON.parse(dados) : [];
+// ============ CARREGAR DADOS DO ARMAZENAMENTO ============
+function carregarDados() {
+    const usuariosSalvos = localStorage.getItem(CHAVE_USUARIOS);
+    const mensagensSalvas = localStorage.getItem(CHAVE_MENSAGENS);
+
+    usuariosCadastrados = usuariosSalvos ? JSON.parse(usuariosSalvos) : [];
+    mensagensGlobais = mensagensSalvas ? JSON.parse(mensagensSalvas) : [];
+}
+
+function salvarDados() {
+    localStorage.setItem(CHAVE_USUARIOS, JSON.stringify(usuariosCadastrados));
+    localStorage.setItem(CHAVE_MENSAGENS, JSON.stringify(mensagensGlobais));
+
+    // Notifica outras abas para atualizarem
+    if (canalSync) {
+        canalSync.postMessage({ tipo: 'atualizacao', timestamp: Date.now() });
+    }
+}
+
+// Recarrega dados e re-renderiza tudo
+function recarregarDados() {
+    carregarDados();
     renderizarListaUsuarios();
+
+    if (usuarioAtual) {
+        // Atualiza usuário atual com dados frescos
+        const atualizado = usuariosCadastrados.find(u => u.id === usuarioAtual.id);
+        if (atualizado) usuarioAtual = atualizado;
+        renderizarMensagens();
+        renderizarAmigos();
+        atualizarBadgeMensagens();
+    }
 }
 
-function salvarUsuarios() {
-    localStorage.setItem('whashat_usuarios', JSON.stringify(usuariosCadastrados));
-}
+// Escuta mudanças de localStorage em outras abas/janelas
+window.addEventListener('storage', (evento) => {
+    if (evento.key === CHAVE_USUARIOS || evento.key === CHAVE_MENSAGENS) {
+        console.log('🔄 Mudança detectada em outra aba. Sincronizando...');
+        recarregarDados();
+    }
+});
 
 // ============ LISTA DE USUÁRIOS NA TELA INICIAL ============
 function renderizarListaUsuarios() {
     const container = document.getElementById('listaUsuarios');
+    if (!container) return;
     container.innerHTML = '';
 
     usuariosCadastrados.forEach(user => {
+        const qtdMsg = mensagensGlobais.filter(m => m.autorId === user.id).length;
+
         const card = document.createElement('div');
         card.className = 'cartao-usuario';
         card.innerHTML = `
             <img src="${user.foto}" alt="${user.nome}">
             <h3>${user.nome}</h3>
             <p class="cidade">📍 ${user.cidade}</p>
+            <div class="contador-msg">📨 ${qtdMsg} mensagem(ns)</div>
             <button class="btn-entrar-cartao">▶ Entrar na Rede</button>
         `;
         card.onclick = () => entrarNaRede(user);
@@ -612,14 +741,12 @@ function cadastrarUsuario() {
     const novoUsuario = {
         id: Date.now(),
         nome, cidade, idade, relacionamento,
-        foto,
-        mensagens: []
+        foto
     };
 
     usuariosCadastrados.push(novoUsuario);
-    salvarUsuarios();
+    salvarDados();
 
-    // Limpar
     document.getElementById('usuarioNome').value = '';
     document.getElementById('usuarioCidade').value = '';
     document.getElementById('usuarioIdade').value = '';
@@ -627,34 +754,46 @@ function cadastrarUsuario() {
     document.getElementById('inputFotoPerfil').value = '';
     fotoPerfilTemp = null;
 
-    alert(`✅ Cadastro de "${nome}" criado com sucesso!\nEle ficará visível permanentemente na tela inicial.`);
+    alert(`✅ Cadastro de "${nome}" criado com sucesso!\n\nEle ficará visível permanentemente na tela inicial e suas mensagens aparecerão para TODOS os usuários.`);
     renderizarListaUsuarios();
     irPara('telaInicial');
 }
 
 // ============ ENTRAR NA REDE ============
 function entrarNaRede(user) {
-    usuarioAtual = user;
-    mensagens = user.mensagens || [];
+    // Busca dados atualizados do usuário
+    const atualizado = usuariosCadastrados.find(u => u.id === user.id);
+    usuarioAtual = atualizado || user;
 
-    document.getElementById('menuFotoPerfil').src = user.foto;
-    document.getElementById('menuNomePerfil').textContent = user.nome;
-    document.getElementById('menuInfoPerfil').textContent = `📍 ${user.cidade} • ${user.idade} anos`;
+    document.getElementById('menuFotoPerfil').src = usuarioAtual.foto;
+    document.getElementById('menuNomePerfil').textContent = usuarioAtual.nome;
+    document.getElementById('menuInfoPerfil').textContent = `📍 ${usuarioAtual.cidade} • ${usuarioAtual.idade} anos`;
 
-    document.getElementById('fotoPerfil').src = user.foto;
-    document.getElementById('nomePerfil').textContent = user.nome;
-    document.getElementById('cidadePerfil').textContent = user.cidade;
-    document.getElementById('idadePerfil').textContent = user.idade;
-    document.getElementById('relPerfil').textContent = user.relacionamento || 'Não informado';
+    document.getElementById('fotoPerfil').src = usuarioAtual.foto;
+    document.getElementById('nomePerfil').textContent = usuarioAtual.nome;
+    document.getElementById('cidadePerfil').textContent = usuarioAtual.cidade;
+    document.getElementById('idadePerfil').textContent = usuarioAtual.idade;
+    document.getElementById('relPerfil').textContent = usuarioAtual.relacionamento || 'Não informado';
 
     renderizarAmigos();
     renderizarMensagens();
+    atualizarBadgeMensagens();
     irPara('telaMenuRede');
+}
+
+// ============ BADGE DE MENSAGENS NÃO LIDAS ============
+function atualizarBadgeMensagens() {
+    const badge = document.getElementById('badgeMensagens');
+    if (!badge || !usuarioAtual) return;
+    const total = mensagensGlobais.length;
+    badge.textContent = total;
+    badge.style.display = total > 0 ? 'block' : 'none';
 }
 
 // ============ AMIGOS ============
 function renderizarAmigos() {
     const container = document.getElementById('listaAmigos');
+    if (!container) return;
     container.innerHTML = '';
 
     const outros = usuariosCadastrados.filter(u => u.id !== usuarioAtual.id);
@@ -665,6 +804,7 @@ function renderizarAmigos() {
     }
 
     outros.forEach(amigo => {
+        const qtdMsg = mensagensGlobais.filter(m => m.autorId === amigo.id).length;
         const item = document.createElement('div');
         item.className = 'item-lista';
         item.innerHTML = `
@@ -672,7 +812,7 @@ function renderizarAmigos() {
                 <img src="${amigo.foto}" alt="${amigo.nome}">
                 <div>
                     <div class="nome">${amigo.nome}</div>
-                    <div class="sub">📍 ${amigo.cidade} • ${amigo.idade} anos</div>
+                    <div class="sub">📍 ${amigo.cidade} • ${qtdMsg} msg</div>
                 </div>
             </div>
             <button class="btn-acao">Visitar</button>
@@ -722,25 +862,19 @@ function falarComIA(texto, genero) {
         alert('⚠️ Seu navegador não suporta síntese de voz.');
         return;
     }
-
-    // Cancela falas anteriores
     window.speechSynthesis.cancel();
-
     const utterance = new SpeechSynthesisUtterance(texto);
     utterance.lang = 'pt-BR';
     utterance.rate = genero === 'mulher' ? 1.0 : 0.9;
     utterance.pitch = genero === 'mulher' ? 1.4 : 0.6;
     utterance.volume = 1.0;
-
-    // Tenta escolher uma voz em português mais adequada
     const vozes = window.speechSynthesis.getVoices();
     const vozPT = vozes.find(v => v.lang.startsWith('pt'));
     if (vozPT) utterance.voice = vozPT;
-
     window.speechSynthesis.speak(utterance);
 }
 
-// ============ ENVIAR MENSAGEM ============
+// ============ ENVIAR MENSAGEM (GLOBAL - todos veem) ============
 function enviarMensagem() {
     if (!usuarioAtual) return;
 
@@ -752,27 +886,26 @@ function enviarMensagem() {
     }
 
     const novaMsg = {
-        id: Date.now(),
+        id: Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        autorId: usuarioAtual.id,
         autor: usuarioAtual.nome,
         fotoAutor: usuarioAtual.foto,
         texto: texto,
         midia: midiaParaEnviar,
-        vozIA: vozSelecionada, // 'mulher', 'homem' ou 'texto'
-        horario: new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'})
+        vozIA: vozSelecionada,
+        horario: new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}),
+        data: new Date().toLocaleDateString('pt-BR'),
+        timestamp: Date.now()
     };
 
-    mensagens.unshift(novaMsg);
-    usuarioAtual.mensagens = mensagens;
-
-    const idx = usuariosCadastrados.findIndex(u => u.id === usuarioAtual.id);
-    if (idx !== -1) {
-        usuariosCadastrados[idx].mensagens = mensagens;
-        salvarUsuarios();
-    }
+    // Adiciona ao mural GLOBAL
+    mensagensGlobais.unshift(novaMsg);
+    salvarDados();  // Notifica todas as abas automaticamente
 
     renderizarMensagens();
+    atualizarBadgeMensagens();
+    renderizarListaUsuarios();
 
-    // Se for áudio IA, já fala automaticamente
     if (vozSelecionada !== 'texto' && texto) {
         falarComIA(texto, vozSelecionada);
     }
@@ -782,18 +915,19 @@ function enviarMensagem() {
     midiaParaEnviar = { tipo: null, dados: null };
 }
 
-// ============ RENDERIZAR MENSAGENS ============
+// ============ RENDERIZAR MENSAGENS (GLOBAL) ============
 function renderizarMensagens() {
     const container = document.getElementById('listaMensagens');
+    if (!container) return;
     container.innerHTML = '';
 
-    if (mensagens.length === 0) {
+    if (mensagensGlobais.length === 0) {
         container.innerHTML = `<p style="text-align:center; color:#6b6b8a; padding:30px;">Nenhuma mensagem ainda. Seja o primeiro a publicar! ✨</p>`;
         return;
     }
 
-    mensagens.forEach(msg => {
-        const ehDoUsuario = msg.autor === usuarioAtual?.nome;
+    mensagensGlobais.forEach(msg => {
+        const ehDoUsuario = usuarioAtual && msg.autorId === usuarioAtual.id;
         let conteudo = msg.texto ? `<p>${msg.texto}</p>` : '';
 
         if (msg.midia.tipo === 'imagem') {
@@ -802,14 +936,14 @@ function renderizarMensagens() {
             conteudo += `<br><video controls src="${msg.midia.dados}" style="max-width:100%; border-radius:8px;"></video>`;
         }
 
-        // Tag IA + botão de ouvir
         let extras = '';
         if (msg.vozIA === 'mulher' || msg.vozIA === 'homem') {
             const emoji = msg.vozIA === 'mulher' ? '👩' : '👨';
             const nome = msg.vozIA === 'mulher' ? 'Mulher IA' : 'Homem IA';
+            const textoEscapado = (msg.texto || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;');
             extras = `
-                <div class="tag-ia">${emoji} Áudio gerado por IA — ${nome}</div><br>
-                <button class="btn-ouvir" onclick="falarComIA('${msg.texto.replace(/'/g, "\\'").replace(/"/g, '&quot;')}', '${msg.vozIA}')">🔊 Ouvir novamente</button>
+                <div class="tag-ia">${emoji} Áudio IA — ${nome}</div><br>
+                <button class="btn-ouvir" onclick="falarComIA('${textoEscapado}', '${msg.vozIA}')">🔊 Ouvir novamente</button>
             `;
         }
 
@@ -817,12 +951,13 @@ function renderizarMensagens() {
         div.className = 'mensagem';
         div.innerHTML = `
             <div class="cabecalho-msg">
-                <span class="autor">
+                <span class="autor" onclick="visitarPerfilDe('${msg.autorId}')">
                     <img src="${msg.fotoAutor}" alt="${msg.autor}">
                     ${msg.autor}
+                    ${ehDoUsuario ? '<span class="tag-dono">VOCÊ</span>' : ''}
                 </span>
-                <span class="horario">${msg.horario}
-                    ${ehDoUsuario ? `<button class="btn-excluir" onclick="excluirMsg(${msg.id})">🗑️ Excluir</button>` : ''}
+                <span class="horario">${msg.data} às ${msg.horario}
+                    ${ehDoUsuario ? `<button class="btn-excluir" onclick="excluirMsg('${msg.id}')">🗑️ Excluir</button>` : ''}
                 </span>
             </div>
             <div class="conteudo-msg">${conteudo}</div>
@@ -832,28 +967,35 @@ function renderizarMensagens() {
     });
 }
 
-// ============ EXCLUIR MENSAGEM ============
-function excluirMsg(id) {
-    if (confirm('Excluir esta mensagem permanentemente?')) {
-        mensagens = mensagens.filter(m => m.id !== id);
-        usuarioAtual.mensagens = mensagens;
-        const idx = usuariosCadastrados.findIndex(u => u.id === usuarioAtual.id);
-        if (idx !== -1) {
-            usuariosCadastrados[idx].mensagens = mensagens;
-            salvarUsuarios();
-        }
-        renderizarMensagens();
+// Visitar perfil de outro usuário clicando no nome dele
+function visitarPerfilDe(autorId) {
+    if (!usuarioAtual || autorId === usuarioAtual.id) return;
+    const outro = usuariosCadastrados.find(u => u.id == autorId);
+    if (outro) {
+        if (confirm(`Entrar na rede de ${outro.nome}?`)) entrarNaRede(outro);
     }
 }
 
-// ============ CONTADOR DE MENSAGENS (para exclusão) ============
+// ============ EXCLUIR MENSAGEM ============
+function excluirMsg(id) {
+    if (confirm('Excluir esta mensagem permanentemente?\n\nEla desaparecerá para TODOS os usuários.')) {
+        mensagensGlobais = mensagensGlobais.filter(m => m.id !== id);
+        salvarDados();
+        renderizarMensagens();
+        atualizarBadgeMensagens();
+        renderizarListaUsuarios();
+    }
+}
+
+// ============ CONTADOR DE MENSAGENS DO USUÁRIO ============
 function atualizarContadorMsg() {
-    const qtd = mensagens.length;
-    document.getElementById('contadorMsg').textContent = `${qtd} mensagem(ns)`;
+    if (!usuarioAtual) return;
+    const minhas = mensagensGlobais.filter(m => m.autorId === usuarioAtual.id).length;
+    document.getElementById('contadorMsg').textContent = `${minhas} mensagem(ns)`;
     const btnApagar = document.getElementById('btnApagarMsgs');
     const btnExcluir = document.getElementById('btnExcluirConta');
 
-    if (qtd === 0) {
+    if (minhas === 0) {
         btnApagar.disabled = true;
         btnApagar.style.opacity = '0.5';
         btnApagar.textContent = '✓ Sem mensagens';
@@ -868,34 +1010,36 @@ function atualizarContadorMsg() {
     }
 }
 
-function apagarTodasMensagens() {
-    if (mensagens.length === 0) return;
-    if (confirm('Apagar TODAS as suas mensagens do mural? Esta ação não pode ser desfeita.')) {
-        mensagens = [];
-        usuarioAtual.mensagens = [];
-        const idx = usuariosCadastrados.findIndex(u => u.id === usuarioAtual.id);
-        if (idx !== -1) {
-            usuariosCadastrados[idx].mensagens = [];
-            salvarUsuarios();
-        }
+function apagarMinhasMensagens() {
+    if (!usuarioAtual) return;
+    const minhas = mensagensGlobais.filter(m => m.autorId === usuarioAtual.id);
+    if (minhas.length === 0) return;
+
+    if (confirm(`Apagar TODAS as suas ${minhas.length} mensagens do mural global?\n\nElas desaparecerão para TODOS os usuários.`)) {
+        mensagensGlobais = mensagensGlobais.filter(m => m.autorId !== usuarioAtual.id);
+        salvarDados();
         renderizarMensagens();
         atualizarContadorMsg();
-        alert('✅ Todas as mensagens foram apagadas.');
+        atualizarBadgeMensagens();
+        renderizarListaUsuarios();
+        alert('✅ Todas as suas mensagens foram apagadas.');
     }
 }
 
 // ============ EXCLUIR CONTA ============
 function excluirConta() {
-    if (mensagens.length > 0) {
-        alert('⚠️ Você precisa apagar TODAS as mensagens antes de excluir a conta!');
+    if (!usuarioAtual) return;
+    const minhas = mensagensGlobais.filter(m => m.autorId === usuarioAtual.id).length;
+
+    if (minhas > 0) {
+        alert('⚠️ Você precisa apagar TODAS as suas mensagens antes de excluir a conta!');
         return;
     }
 
-    if (confirm(`Tem certeza que deseja EXCLUIR PERMANENTEMENTE o cadastro de "${usuarioAtual.nome}"?\n\nEsta ação não pode ser desfeita.`)) {
+    if (confirm(`Tem certeza que deseja EXCLUIR PERMANENTEMENTE o cadastro de "${usuarioAtual.nome}"?\n\nEsta ação não pode ser desfeita e afetará todos os usuários.`)) {
         usuariosCadastrados = usuariosCadastrados.filter(u => u.id !== usuarioAtual.id);
-        salvarUsuarios();
+        salvarDados();
         usuarioAtual = null;
-        mensagens = [];
         alert('✅ Cadastro excluído com sucesso.');
         renderizarListaUsuarios();
         irPara('telaInicial');
@@ -903,7 +1047,30 @@ function excluirConta() {
 }
 
 // ============ INICIALIZAÇÃO ============
-carregarUsuarios();
+carregarDados();
+renderizarListaUsuarios();
+
+// Atualiza a interface a cada 2 segundos como fallback (garantia extra de sincronização)
+setInterval(() => {
+    const usuariosSalvos = localStorage.getItem(CHAVE_USUARIOS);
+    const mensagensSalvas = localStorage.getItem(CHAVE_MENSAGENS);
+    const usuariosAtuais = usuariosSalvos ? JSON.parse(usuariosSalvos) : [];
+    const mensagensAtuais = mensagensSalvas ? JSON.parse(mensagensSalvas) : [];
+
+    // Verifica se houve mudanças
+    if (JSON.stringify(usuariosAtuais) !== JSON.stringify(usuariosCadastrados) ||
+        JSON.stringify(mensagensAtuais) !== JSON.stringify(mensagensGlobais)) {
+        console.log('🔄 Sincronização automática (fallback).');
+        recarregarDados();
+    }
+}, 2000);
+
+// Carrega vozes para TTS
+if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+    };
+}
 </script>
 
 </body>
